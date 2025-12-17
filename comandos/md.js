@@ -11,14 +11,14 @@ module.exports = {
         .setRequired(true)
     ),
 async execute(interaction) {
-  // Obtener los roles del miembro que ejecuta el comando
+  
   const memberRoles = interaction.member.roles.cache;
 
-  // Filtrar solo los roles que tengan permisos de administrador
+
   const adminRoles = memberRoles.filter(role => role.permissions.has('Administrator'));
 
   if (adminRoles.size === 0) {
-    return interaction.reply({ content: '❌ No tienes permisos de administrador para usar este comando.', ephemeral: true });
+    return interaction.reply({ content: 'No tienes permisos de administrador para usar este comando.', ephemeral: true });
   }
 
   const mensaje = interaction.options.getString('mensaje');
@@ -27,7 +27,7 @@ async execute(interaction) {
   let enviados = 0;
   let fallidos = 0;
 
-  await interaction.reply({ content: '📨 Enviando mensajes...', ephemeral: true });
+  await interaction.reply({ content: 'Enviando mensajes...', ephemeral: true });
 
   for (const member of members.values()) {
     if (member.user.bot) continue;
@@ -42,7 +42,7 @@ async execute(interaction) {
   }
 
   await interaction.followUp({
-    content: `✅ Mensaje enviado a ${enviados} usuarios.\n❌ Falló en ${fallidos} usuarios.`,
+    content: `Mensaje enviado a ${enviados} usuarios.\n Falló en ${fallidos} usuarios.`,
     ephemeral: true
   });
   }
