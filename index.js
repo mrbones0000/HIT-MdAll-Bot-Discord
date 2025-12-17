@@ -21,7 +21,7 @@ const command = {
     let enviados = 0;
     let fallidos = 0;
 
-    await interaction.reply({ content: '📨 Enviando mensajes...', ephemeral: true });
+    await interaction.reply({ content: 'Enviando mensajes...', ephemeral: true });
 
     for (const member of members.values()) {
       if (member.user.bot) continue;
@@ -36,7 +36,7 @@ const command = {
     }
 
     await interaction.followUp({
-      content: `✅ Mensaje enviado a ${enviados} usuarios.\n❌ Falló en ${fallidos} usuarios.`,
+      content: `Mensaje enviado a ${enviados} usuarios.\n Falló en ${fallidos} usuarios.`,
       ephemeral: true
     });
   }
@@ -49,19 +49,19 @@ const rest = new REST({ version: '10' }).setToken(config.token);
 
 (async () => {
   try {
-    console.log('🔁 Registrando comando /md...');
+    console.log('Registrando comando /md');
     await rest.put(
       Routes.applicationCommands(config.clientId),
       { body: [command.data.toJSON()] }
     );
-    console.log('✅ Comando registrado');
+    console.log('Comando registrado');
   } catch (error) {
     console.error(error);
   }
 })();
 
 client.on('ready', () => {
-  console.log(`🤖 Bot conectado como ${client.user.tag}`);
+  console.log(`Bot conectado como ${client.user.tag}`);
 });
 
 client.on('interactionCreate', async interaction => {
@@ -74,7 +74,7 @@ client.on('interactionCreate', async interaction => {
     await cmd.execute(interaction);
   } catch (error) {
     console.error(error);
-    await interaction.reply({ content: '⚠️ Error al ejecutar el comando.', ephemeral: true });
+    await interaction.reply({ content: 'Error al ejecutar el comando.', ephemeral: true });
   }
 });
 
